@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about" id="aboutNav">About Me</a></li>
+            <li><a href="#projects" id="projectsNav">Projects</a></li>
+        </ul>
+    </nav>
+    <header>
+        <video autoplay muted loop playsinline class="bg-video">
+            <source src="mi xkit-aerial-shot-of-a-beach-with-sea-waves-1087-full-hd.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <img src="WhatsApp Bild 2025-09-27 um 16.05.28_c349336e.jpg" alt="Silas Bank account" class="account-pic">
+        <h1>Carpe Diem</h1>
+        <p>Hi! I'm Silas. Welcome to my webpage.</p>
+    </header>
+    <section id="about" style="display:none;">
+        <div class="about-container">
+            <h2>About Me</h2>
+            <p>
+                My name is Silas and I am a student at MAVT. I am passionate about technology, sports and engineering.
+                I enjoy working on creative projects and learning new skills. Another big passion of mine is Sports, as I love the physical challenge. 
+            </p>
+            <ul class="about-list">
+                <li><strong>Field:</strong> Mechanical and Process Engineering (MAVT)</li>
+                <li><strong>Skills:</strong> Programming, Web Development, CAD, Teamwork</li>
+                <li><strong>Interests:</strong> Nature, Innovation, Problem Solving</li>
+            </ul>
+            <div class="about-social">
+                <a href="https://www.linkedin.com/in/silas-dittmann-a27b12256/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/silasdittmann-dotcom" target="_blank">GitHub</a>
+                <!-- Add more social links if you want -->
+                <div class="about-contact">
+                    Email: silasdittmann@gmail.com<br>
+                    Phone: +41 791324466
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="projects" style="display:none;">
+        <div class="projects-container">
+            <h2>Projects</h2>
+            <ul>
+                <li>
+                    <strong>Webpage Portfolio</strong> – A personal website built with HTML, CSS, and JavaScript.
+                </li>
+                <li>
+                    <strong>CAD Design</strong> – Mechanical parts designed in SolidWorks.
+                </li>
+                <!-- Add more projects here -->
+            </ul>
+        </div>
+    </section>
+    <script>
+        // Hide all sections
+        function hideSections() {
+            document.getElementById('about').style.display = 'none';
+            document.getElementById('projects').style.display = 'none';
+        }
+
+        // Show About Me
+        document.getElementById('aboutNav').onclick = function(e) {
+            e.preventDefault();
+            hideSections();
+            document.getElementById('about').style.display = 'block';
+        };
+
+        // Show Projects
+        document.getElementById('projectsNav').onclick = function(e) {
+            e.preventDefault();
+            hideSections();
+            document.getElementById('projects').style.display = 'block';
+        };
+
+        // Hide all sections on page load
+        hideSections();
+    </script>
+</body>
+
+</html>

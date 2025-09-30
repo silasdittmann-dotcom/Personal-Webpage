@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+header {
+    position: relative;
+    overflow: hidden;
+    background: #0077b6;
+    color: white;
+    padding: 2em 0;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.bg-video {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+header > *:not(.bg-video) {
+    position: relative;
+    z-index: 1;
+}
+header::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* dark overlay for readability */
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    z-index: 1;
+}
+button {
+    padding: 0.5em 1.5em;
+    font-size: 1em;
+    border: none;
+    background: #00b4d8;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+button:hover {
+    background: #0096c7;
+}
+section {
+    margin: 2em auto;
+    max-width: 600px;
+    background: white;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.account-pic {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #00b4d8;
+    margin-bottom: 1em;
+}
+nav {
+    background: #023e8a;
+    padding: 0.5em 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.2s;
+}
+nav a:hover {
+    color: #00b4d8;
+}
+.about-container {
+    text-align: left;
+    padding: 2em;
+    background: url('biplane-aircraft-2924678.jpg') center/cover no-repeat;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    max-width: 600px;
+    margin: 2em auto;
+    color: #fff; /* Makes text readable on image */
+    position: relative;
+}
+.about-container::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45); /* dark overlay for readability */
+    border-radius: 10px;
+    z-index: 1;
+}
+.about-container > * {
+    position: relative;
+    z-index: 2;
+}
+.about-list {
+    margin: 1em 0;
+    padding-left: 1em;
+}
+.about-list li {
+    margin-bottom: 0.5em;
+}
+.about-social {
+    margin-top: 1em;
+}
+.about-social a {
+    display: inline-block;
+    margin-right: 1em;
+    color: #0077b6;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+.about-social a:hover {
+    color: #00b4d8;
+}
+.about-contact {
+    color: #bbb;
+    font-family: 'Merriweather', serif;
+    font-size: 0.7em; /* 30% smaller */
+    margin-top: 8px;
+}
