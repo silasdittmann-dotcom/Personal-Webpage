@@ -51,18 +51,37 @@
     <section id="projects" style="display:none;">
         <div class="projects-container">
             <h2>Projects</h2>
-            <ul>
-                <li>
-                    <strong>Innovations Projekt</strong> – A robot built to maintain a permaculture garden model.
-                </li>
-                <li>
-                    <strong>Humanoid Project</strong> – A human sized robot able to tasks and walk.
-                </li>
-                    <strong>180/170/150/100</strong> - A first goal of Squat, Deadlift, Benchpress and clean. 
-                <!-- Add more projects here -->
-                    Art
-            </ul>
+            <div class="project-item">
+                <strong>Innovations Projekt</strong>
+                <span>– A robot built to maintain a permaculture garden model.</span>
+            </div>
+            <div class="project-item">
+                <strong>Humanoid Project</strong>
+                <span>– A human sized robot able to tasks and walk.</span>
+            </div>
+            <div class="project-item">
+                <strong>180/170/150/100</strong>
+                <span>– A first goal of squat, deadlift, benchpress and clean.</span>
+            </div>
+            <div class="project-item">
+                <strong>Art projects</strong>
+                <span>– From fotos to fantasies.</span>
+            </div>
+            <!-- Add more projects here -->
         </div>
+    </section>
+    <button id="easterEggBtn" class="egg-btn" title="Snake Easter Egg">
+        <span class="egg-shape"></span>
+        <span class="egg-snake" style="position:absolute;left:6px;top:12px;font-size:14px;">🐍</span>
+    </button>
+    <section id="easterEggSection" style="display:none;max-width:400px;margin:2em auto;background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);padding:2em;">
+        <h2>🐍 Easter Egg</h2>
+        <p>
+            Play Snake! Use arrow keys.<br>
+            <strong>To restart, press on the egg again.</strong>
+        </p>
+        <canvas id="snakeCanvas" width="320" height="320" style="background:#e0f7fa;border-radius:8px;box-shadow:0 2px 8px #48b6ff;margin:1em 0;"></canvas>
+        <p id="snakeScore">Score: 0</p>
     </section>
     <script>
         // Hide all sections
@@ -87,6 +106,106 @@
 
         // Hide all sections on page load
         hideSections();
+
+        // Easter Egg button logic
+        document.getElementById('easterEggBtn').onclick = function() {
+            hideSections();
+            document.getElementById('easterEggSection').style.display = 'block';
+            startSnakeGame(); // Restart game on every egg press
+        };
+
+        // Simple Snake Game
+        function startSnakeGame() {
+            const canvas = document.getElementById('snakeCanvas');
+            const ctx = canvas.getContext('2d');
+            const box = 16;
+            let snake = [{x: 10, y: 10}];
+            let direction = 'RIGHT';
+            let food = {x: Math.floor(Math.random()*20), y: Math.floor(Math.random()*20)};
+            let score = 0;
+            let gameOver = false;
+
+            document.getElementById('snakeScore').textContent = "Score: 0";
+
+            document.onkeydown = function(e) {
+                if (e.key === "ArrowLeft" && direction !== 'RIGHT') direction = 'LEFT';
+                else if (e.key === "ArrowUp" && direction !== 'DOWN') direction = 'UP';
+                else if (e.key === "ArrowRight" && direction !== 'LEFT') direction = 'RIGHT';
+                else if (e.key === "ArrowDown" && direction !== 'UP') direction = 'DOWN';
+            };
+
+            function draw() {
+                // Draw grid background
+                for (let y = 0; y < canvas.height / box; y++) {
+                    for (let x = 0; x < canvas.width / box; x++) {
+                        ctx.fillStyle = (x + y) % 2 === 0 ? "#b7e4c7" : "#95d5b2"; // two shades of green
+                        ctx.fillRect(x * box, y * box, box, box);
+                    }
+                }
+
+                // Draw snake
+                for (let i = 0; i < snake.length; i++) {
+                    ctx.fillStyle = i === 0 ? "#0077b6" : "#48b6ff";
+                    ctx.fillRect(snake[i].x * box, snake[i].y * box, box, box);
+                    ctx.strokeStyle = "#fff";
+                    ctx.strokeRect(snake[i].x * box, snake[i].y * box, box, box);
+                }
+
+                // Draw food
+                ctx.fillStyle = "#ffb703";
+                ctx.fillRect(food.x * box, food.y * box, box, box);
+
+                // Move snake
+                let head = {x: snake[0].x, y: snake[0].y};
+                if (direction === 'LEFT') head.x--;
+                if (direction === 'UP') head.y--;
+                if (direction === 'RIGHT') head.x++;
+                if (direction === 'DOWN') head.y++;
+
+                // Game over conditions
+                if (
+                    head.x < 0 || head.x >= canvas.width/box ||
+                    head.y < 0 || head.y >= canvas.height/box ||
+                    snake.some(seg => seg.x === head.x && seg.y === head.y)
+                ) {
+                    gameOver = true;
+                    ctx.fillStyle = "#d90429";
+                    ctx.font = "bold 24px Arial";
+                    ctx.fillText("Game Over!", 80, 160);
+                    return;
+                }
+
+                snake.unshift(head);
+
+                // Eat food
+                if (head.x === food.x && head.y === food.y) {
+                    score++;
+                    document.getElementById('snakeScore').textContent = "Score: " + score;
+                    food = {
+                        x: Math.floor(Math.random()*20),
+                        y: Math.floor(Math.random()*20)
+                    };
+                } else {
+                    snake.pop();
+                }
+            }
+
+            // Reset game state
+            snake = [{x: 10, y: 10}];
+            direction = 'RIGHT';
+            food = {x: Math.floor(Math.random()*20), y: Math.floor(Math.random()*20)};
+            score = 0;
+            gameOver = false;
+
+            // Game loop
+            function loop() {
+                if (!gameOver && document.getElementById('easterEggSection').style.display === 'block') {
+                    draw();
+                    setTimeout(loop, 100);
+                }
+            }
+            loop();
+        }
     </script>
 </body>
 
